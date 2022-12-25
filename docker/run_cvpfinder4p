@@ -1,0 +1,14 @@
+#!/bin/sh
+
+SRC=$1
+REPORT=report
+DIR=$(pwd)
+
+if [ ! -e $REPORT ]; then
+  mkdir -p $REPORT
+fi
+docker container run -it -v $DIR:/data -v ${DIR}/${REPORT}:/cvpfinder/report amanhirohisa/cvpfinder /cvpfinder/cvpfinder4p /data/$SRC
+
+echo "== Note ============================================"
+echo "/data/$SRC --> $SRC"
+echo "/cvpfinder/report/report.csv --> report/report.csv"
