@@ -56,3 +56,8 @@ You can analyze **src/xxx** as:
 `run_cvpfinder4j src/xxx`
 
 Then, you can get `report/report.csv` under the current directory.
+
+We also provide [run_cvpfinder4j.bat](https://raw.githubusercontent.com/amanhirohisa/cvpfinder/main/docker/run_cvpfinder4j.bat), [run_cvpfinder4p.bat](https://raw.githubusercontent.com/amanhirohisa/cvpfinder/main/docker/run_cvpfinder4p.bat) for Windows platform.  
+You can analyze **src\xxx** as:
+
+`run_cvpfinder4j.bat src\xxx`
