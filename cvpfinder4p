@@ -1,0 +1,43 @@
+#!/bin/sh
+#
+# cvpfinder4p ver. 1.0
+# (C) 2022 Hirohisa Aman <aman@ehime-u.ac.jp>
+#
+
+STRING_SIM_THRESHOLD=0.84
+SEMANTIC_SIM_THRESHOLD=0.95
+
+BASE_DIR=$(cd $(dirname $0) && pwd)
+LIB_DIR=${BASE_DIR}/lib
+REPORT_DIR=${BASE_DIR}/report
+
+VAR_TABLE=${REPORT_DIR}/variable_table.txt
+CANDIDATE_SET=${REPORT_DIR}/variable_pairs.txt
+REPORT_FILE=${REPORT_DIR}/report.csv
+
+python ${LIB_DIR}/python_variable_extractor.py $* | cut -f1,3-6 > ${VAR_TABLE}
+
+python ${LIB_DIR}/comp_var_extractor.py ${LIB_DIR}/addtional_words.txt < ${VAR_TABLE} > ${VAR_TABLE}.comp
+if [ $(wc -l ${VAR_TABLE}.comp | cut -f1 -d' ') -eq 1 ]; then
+  echo "No variable with compound name found"
+  rm -f ${VAR_TABLE}.comp
+  exit
+fi
+
+python ${LIB_DIR}/var_pair_extractor.py < ${VAR_TABLE}.comp > $CANDIDATE_SET
+rm -f ${VAR_TABLE}.comp
+if [ $(wc -l $CANDIDATE_SET | cut -f1 -d' ') -eq 1 ]; then
+  echo "No variable pair found"
+  exit
+fi
+
+echo -n "Computing string simiarity ... "
+python ${LIB_DIR}/compute_Levenshtein_similarity.py < $CANDIDATE_SET > $CANDIDATE_SET.str
+echo "done."
+echo -n "Computing semantic similarity ... "
+python ${LIB_DIR}/compute_semantic_similarity.py ${LIB_DIR}/doc2vec4python.model < $CANDIDATE_SET > $CANDIDATE_SET.sem
+echo "done."
+
+echo ""
+python ${LIB_DIR}/print_report.py $STRING_SIM_THRESHOLD $SEMANTIC_SIM_THRESHOLD $CANDIDATE_SET.str $CANDIDATE_SET.sem $REPORT_FILE
+rm -f $CANDIDATE_SET.str $CANDIDATE_SET.sem
