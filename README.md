@@ -43,7 +43,7 @@ You need to mount the input/output directories.
 Suppose your current directory is **/Users/aman**.<br>
 When you analyze **src/xxx** and get the report as **report**/report.csv, run as:
 
-`docker container run -it -v `**/Users/aman**`:/data -v ` **/Users/aman/report**`:/cvpfinder/report amanhirohisa/cvpfinder /cvpfinder/cvpfinder4j /data/`**src/xxx**
+`docker container run -it -v /Users/aman:/data -v /Users/aman/report:/cvpfinder/report amanhirohisa/cvpfinder /cvpfinder/cvpfinder4j /data/src/xxx`
 
 In the above example, the tool
 - analyzes `/data/src/xxx`</span> but it corresponds to **src/xxx** under the current directory, and  
