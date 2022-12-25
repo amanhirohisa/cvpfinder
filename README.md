@@ -17,7 +17,7 @@ See https://docs.docker.com/desktop/ for installing Docker Desktop.
 
 ### Manually Install
 1. Download [cvpfinder-1_0.zip](https://github.com/amanhirohisa/cvpfinder/releases/download/v1.0/cvpfinder-1_0.zip) and unpack it.
-2. Download [javaparser-core-3.24.2.jar](https://search.maven.org/search?q=g:com.github.javaparser%20AND%20a:javaparser-core) and put it into `cvpfinder/lib`.
+2. Download [javaparser-core-3.24.2.jar](https://repo1.maven.org/maven2/com/github/javaparser/javaparser-core/3.24.2/javaparser-core-3.24.2.jar) and put it into `cvpfinder/lib`.
 3. Add the directory `cvpfinder` to your PATH environmental variable.  
 ex. `export PATH=$PATH:/home/xxx/cvpfinder`
 4. Install the followings:  
@@ -40,10 +40,19 @@ For Python programs, run `cvpfinder4p` instead.
 ### Run via Docker
 You need to mount the input/output directories.  
 
-When you analyze <span style="color: red">C:\Users\aman\src\xxx</span> and get the report as <span style="color: green">C:\Users\aman\report</span>\report.csv, run as:  
-`docker container run -it -v `<span style="color: red">C:\Users\aman\src\xxx</span>`:/data -v ` <span style="color: green">C:\Users\aman\report</span>`:/cvpfinder/report cvpfinder /cvpfinder/cvpfinder4j /data/`<span style="color: red">xxx</span>
+Suppose your current directory is **/Users/aman**.<br>
+When you analyze **src/xxx** and get the report as **report**/report.csv, run as:
+
+`docker container run -it -v `**/Users/aman**`:/data -v ` **/Users/aman/report**`:/cvpfinder/report amanhirohisa/cvpfinder /cvpfinder/cvpfinder4j /data/`**src/xxx**
 
 In the above example, the tool
-- analyzes `/data/xxx`</span> but it corresponds to your <span style="color: red">C:\Users\aman\src\xxx</span>, and  
-- outputs `/cvpfinder/report/report.csv` but it corresponds to your <span style="color: green">C:\Users\aman\report</span>\report.csv.<br>
-Notice: you need to create <span style="color: green">C:\Users\aman\report</span> first.
+- analyzes `/data/src/xxx`</span> but it corresponds to **src/xxx** under the current directory, and  
+- outputs `/cvpfinder/report/report.csv` but it corresponds to **report/report.csv** under the current directory.<br>
+Notice: you need to create directory **report** first.
+
+Because the above way of running is a little complicated, we provide simple shell scripts [run_cvpfinder4j](https://raw.githubusercontent.com/amanhirohisa/cvpfinder/main/docker/run_cvpfinder4j), [run_cvpfinder4p](https://raw.githubusercontent.com/amanhirohisa/cvpfinder/main/docker/run_cvpfinder4p).  
+You can analyze **src/xxx** as:
+
+`run_cvpfinder4j src/xxx`
+
+Then, you can get `report/report.csv` under the current directory.
