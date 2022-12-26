@@ -8,14 +8,21 @@ These are shell scripts running Java and Python programs to analyze the source c
 ## How to install
 You can install this tool (1) from Docker Hub or (2) manually.
 
-### Install from Docker Hub
+### (1) Install from Docker Hub
 
-Run the following command:  
-`docker pull amanhirohisa/cvpfinder`
+Run the following commands:  
+<On Mac (Apple chip)>  
+`docker pull amanhirohisa/cvpfinder:linux_arm64_v8`  
+`docker tag amanhirohisa/cvpfinder:linux_arm64_v8 amanhirohisa/cvpfinder:latest`
+
+<On Windows, etc.>  
+`docker pull amanhirohisa/cvpfinder:linux_arm64`  
+`docker tag amanhirohisa/cvpfinder:linux_arm64 amanhirohisa/cvpfinder:latest`
+
 
 See https://docs.docker.com/desktop/ for installing Docker Desktop.
 
-### Manually Install
+### (2) Manually Install
 1. Download [cvpfinder-1_0.zip](https://github.com/amanhirohisa/cvpfinder/releases/download/v1.0/cvpfinder-1_0.zip) and unpack it.
 2. Download [javaparser-core-3.24.2.jar](https://repo1.maven.org/maven2/com/github/javaparser/javaparser-core/3.24.2/javaparser-core-3.24.2.jar) and put it into `cvpfinder/lib`.
 3. Add the directory `cvpfinder` to your PATH environmental variable.  
@@ -53,7 +60,7 @@ Notice: you need to create directory **report** first.
 Because the above way of running is a little complicated, we provide simple shell scripts [run_cvpfinder4j](https://raw.githubusercontent.com/amanhirohisa/cvpfinder/main/docker/run_cvpfinder4j), [run_cvpfinder4p](https://raw.githubusercontent.com/amanhirohisa/cvpfinder/main/docker/run_cvpfinder4p).  
 You can analyze **src/xxx** as:
 
-`run_cvpfinder4j src/xxx`
+`sh run_cvpfinder4j src/xxx`
 
 Then, you can get `report/report.csv` under the current directory.
 
