@@ -44,15 +44,7 @@ with open(semantic_results) as f:
             record['confusing'] = record['confusing'] + 1
         idx = idx + 1
 
-for i in range(len(data)):
-    max = i
-    for j in range(i+1, len(data)):
-        if data[max]['confusing'] < data[j]['confusing']:
-            max = j
-    if max != i:
-        tmp = data[i]
-        data[i] = data[max]
-        data[max] = tmp
+data.sort(key=lambda x: x['confusing'], reverse=True)
 
 count = 0
 for i in range(len(data)):

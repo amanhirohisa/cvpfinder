@@ -1,7 +1,7 @@
 #!/bin/sh
 #
-# cvpfinder4j ver. 1.0
-# (C) 2022 Hirohisa Aman <aman@ehime-u.ac.jp>
+# cvpfinder4j ver. 1.1
+# (C) 2022-2023 Hirohisa Aman <aman@ehime-u.ac.jp>
 #
 ####################################################################
 # TODO:
@@ -44,7 +44,7 @@ if [ $(wc -l $CANDIDATE_SET | cut -f1 -d' ') -eq 1 ]; then
   exit
 fi
 
-echo -n "Computing string simiarity ... "
+echo -n "Computing string similarity ... "
 python ${LIB_DIR}/compute_Levenshtein_similarity.py < $CANDIDATE_SET > $CANDIDATE_SET.str
 echo "done."
 echo -n "Computing semantic similarity ... "
