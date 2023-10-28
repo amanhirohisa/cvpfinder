@@ -23,7 +23,7 @@ Run the following commands:
 See https://docs.docker.com/desktop/ for installing Docker Desktop.
 
 ### (2) Manually Install
-1. Download [cvpfinder-1_0.zip](https://github.com/amanhirohisa/cvpfinder/releases/download/v1.0/cvpfinder-1_0.zip) and unpack it.
+1. Download [cvpfinder-1_1.zip](https://github.com/amanhirohisa/cvpfinder/releases/download/v1.1/cvpfinder-1_1.zip) and unpack it.
 2. Download [javaparser-core-3.24.2.jar](https://repo1.maven.org/maven2/com/github/javaparser/javaparser-core/3.24.2/javaparser-core-3.24.2.jar) and put it into `cvpfinder/lib`.
 3. Add the directory `cvpfinder` to your PATH environmental variable.  
 ex. `export PATH=$PATH:/home/xxx/cvpfinder`
